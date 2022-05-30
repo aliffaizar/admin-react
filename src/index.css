@@ -1,13 +1,80 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer base {
+	:root {
+		--primary: 8, 145, 178;
+		--primary-light: 236, 254, 255;
+		--primary-dark: 22, 78, 99;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+
+	.theme-red {
+		--primary: 220, 38, 38;
+		--primary-light: 254, 242, 242;
+		--primary-dark: 127, 29, 29;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+
+	.theme-green {
+		--primary: 22, 162, 73;
+		--primary-light: 247, 254, 231;
+		--primary-dark: 54, 83, 20;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+	.theme-sky {
+		--primary: 2, 132, 199;
+		--primary-dark: 12, 74, 110;
+		--primary-light: 240, 249, 255;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+	.theme-violet {
+		--primary: 124, 58, 237;
+		--primary-light: 245, 243, 255;
+		--primary-dark: 76, 29, 149;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+	.theme-fuchsia {
+		--primary: 192, 38, 211;
+		--primary-light: 253, 244, 255;
+		--primary-dark: 112, 26, 117;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+	.theme-yellow {
+		--primary: 202, 138, 4;
+		--primary-light: 254, 252, 232;
+		--primary-dark: 113, 63, 18;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
+	.theme-orange {
+		--primary: 234, 88, 12;
+		--primary-light: 255, 247, 237;
+		--primary-dark: 124, 45, 18;
+		--dark-main: 35, 39, 42;
+		--dark-acent: 44, 47, 51;
+		--light-main: 243, 244, 246;
+		--light-acent: 255, 255, 255;
+	}
 }
