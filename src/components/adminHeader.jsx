@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { FaBars, FaBell, FaEnvelope } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { setSidebar } from "../redux/sidebarSlice";
-import avatar from "../assets/img/avatar.jpg";
 import { Menu, Popover } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import ThemeSetting from "./themeSetting";
 
 const AdminHeader = () => {
 	const { sidebar } = useSelector((state) => state.sidebar);
@@ -30,6 +30,7 @@ const AdminHeader = () => {
 				<button className='text-skin-primary-dark dark:text-skin-primary-light'>
 					<FaBell className='w-5 h-5' />
 				</button>
+				<ThemeSetting />
 				<Popover className='relative'>
 					<Popover.Button className='text-skin-primary-dark dark:text-skin-primary-light'>
 						<FaEnvelope className='w-5 h-5' />
@@ -44,8 +45,8 @@ const AdminHeader = () => {
 				<Menu as='div' className='relative inline-block'>
 					<Menu.Button>
 						<img
-							src={avatar}
-							alt={avatar}
+							src='http://localhost:3000/img/avatar.jpg'
+							alt='avatar'
 							className='w-8 h-8 rounded-full object-center object-cover'
 						/>
 					</Menu.Button>

@@ -44,7 +44,7 @@ const AdminSidebar = () => {
 	return (
 		<>
 			{sidebar ? (
-				<aside className='w-16 relative h-screen overflow-hidden hover:overflow-y-auto shadow-lg bg-skin-light-main dark:bg-skin-dark-main px-2 py-1'>
+				<aside className='w-16 fixed h-screen overflow-hidden hover:overflow-y-auto shadow-lg bg-skin-light-main dark:bg-skin-dark-main px-2 py-1'>
 					<div className='w-full py-2 border-b-2 dark:border-b-skin-dark-acent'>
 						<Link to='/'>
 							<h3 className='text-2xl flex justify-center items-center font-mono font-bold text-skin-primary'>
@@ -63,7 +63,7 @@ const AdminSidebar = () => {
 					</nav>
 				</aside>
 			) : (
-				<aside className='w-72 relative h-screen overflow-hidden hover:overflow-y-auto shadow-lg bg-skin-light-main dark:bg-skin-dark-main px-2 py-1'>
+				<aside className='w-72 fixed h-screen overflow-hidden hover:overflow-y-auto shadow-lg bg-skin-light-main dark:bg-skin-dark-main px-2 py-1'>
 					<div className='w-full py-2 border-b-2 dark:border-b-skin-dark-acent'>
 						<Link to='/'>
 							<h3 className='text-2xl flex justify-center items-center font-mono font-bold text-skin-primary'>

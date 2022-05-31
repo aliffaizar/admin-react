@@ -1,4 +1,4 @@
-import { FaCog, FaTimes } from "react-icons/fa";
+import { FaPalette, FaTimes } from "react-icons/fa";
 import { BsCheck } from "react-icons/bs";
 import { Popover } from "@headlessui/react";
 import { setTheme } from "../redux/themeSlice";
@@ -67,14 +67,14 @@ const ThemeSetting = () => {
 			{({ open }) => (
 				<>
 					<Popover.Button
-						className={`absolute z-20 right-5 text-xl p-3 border-2 bg-transparent text-skin-primary border-skin-primary/90 rounded-full bottom-5 ${
+						className={`text-skin-primary-dark dark:text-skin-primary-light ${
 							open ? "hidden" : "flex"
 						}`}
 					>
-						<FaCog />
+						<FaPalette className='w-5 h-5' />
 					</Popover.Button>
 					<Popover.Panel
-						className={`absolute z-20 right-0 h-full bg-skin-light-acent dark:bg-skin-dark-main shadow-lg w-72`}
+						className={`absolute z-20 h-screen inset-y-0 right-0 bg-skin-light-acent dark:bg-skin-dark-main shadow-lg w-72`}
 					>
 						<div className='flex justify-between items-center p-3'>
 							<h3 className='font-semibold text-xl text-skin-primary-dark dark:text-skin-primary-light'>
