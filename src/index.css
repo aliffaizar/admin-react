@@ -91,4 +91,7 @@
 	::-webkit-scrollbar-thumb:hover {
 		@apply bg-skin-primary-dark rounded;
 	}
+	.pagination {
+		@apply flex justify-center items-center mt-2 mb-4 space-x-2 cursor-pointer;
+	}
 }
