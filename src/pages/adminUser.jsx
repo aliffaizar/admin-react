@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../redux/userSlice";
 
 const AdminUser = () => {
-	const [entries, setEntries] = useState(10);
+	const [entries, setEntries] = useState(5);
 	const { users, isLoading, error } = useSelector((state) => state.user);
+	const [data, setData] = useState(users);
 	const dispatch = useDispatch();
 	const [index, setIndex] = useState(0);
 	const [newUsers, setNewUsers] = useState([]);
 	const [newUsersOffset, setNewUsersOffset] = useState(0);
+	const [query, setQuery] = useState("");
 	const handleChange = (e) => {
 		setEntries(parseInt(e.target.value));
 	};
@@ -19,39 +21,60 @@ const AdminUser = () => {
 	}, [dispatch]);
 	useEffect(() => {
 		const endOffset = newUsersOffset + entries;
-		setNewUsers(users.slice(newUsersOffset, endOffset));
-		setIndex(Math.ceil(users.length / entries));
-	}, [users, entries, newUsersOffset]);
+		if (query === "") {
+			setData(users);
+		}
+		setNewUsers(data.slice(newUsersOffset, endOffset));
+		setIndex(Math.ceil(data.length / entries));
+	}, [data, entries, newUsersOffset, users, query]);
 	const handleClick = (e) => {
-		const newOffset = (e.selected * index) % users.length;
+		const newOffset = (e.selected * index) % data.length;
 		setNewUsersOffset(newOffset);
 	};
+	const handleSearch = (e) => {
+		setQuery(e.target.value);
+		const result = users.filter((user) => {
+			return (
+				user.name.first.toLowerCase().includes(query.toLowerCase()) ||
+				user.name.last.toLowerCase().includes(query.toLowerCase())
+			);
+		});
+		setData(result);
+	};
+
 	return (
 		<>
 			<div className='p-5 space-y-3'>
 				{isLoading && <div>Loading...</div>}
 				{error && <div>{error}</div>}
+
 				<h1 className='text-3xl font-bold text-skin-primary-dark dark:text-skin-primary-light'>
 					All Users
 				</h1>
 				<div className='bg-skin-light-main dark:bg-skin-dark-main shadow-lg rounded px-4 py-2 w-full overflow-y-auto space-y-2'>
 					<div className='inline-flex items-center justify-between w-full'>
-						<div className='inline-flex items-center space-x-1'>
+						<div className='inline-flex items-center space-x-1 text-skin-primary-dark dark:text-skin-primary-light'>
 							<p>Show</p>
 							<select
-								className='ring-0 border-0 focus:ring-0 focus:border-0'
+								className='ring-0 border-0 focus:ring-0 focus:border-0 rounded bg-skin-light-acent dark:bg-skin-dark-acent '
 								onChange={handleChange}
 							>
+								<option value={10}>5</option>
 								<option value={10}>10</option>
 								<option value={25}>25</option>
 								<option value={50}>50</option>
-								<option value={100}>100</option>
 							</select>
 							<p>entries</p>
 						</div>
-						<div className='inline-flex space-x-2 items-center'>
+						<div className='inline-flex space-x-2 items-center text-skin-primary-dark dark:text-skin-primary-light rounded'>
 							<p>Search:</p>
-							<input type='search' className='px-3 py-1' placeholder='Search' />
+							<input
+								type='search'
+								name='search'
+								className='px-3 py-1 bg-skin-light-acent dark:bg-skin-dark-acent'
+								placeholder='Search'
+								onChange={handleSearch}
+							/>
 						</div>
 					</div>
 
@@ -70,6 +93,7 @@ const AdminUser = () => {
 								</th>
 							</tr>
 						</thead>
+
 						<tbody>
 							{newUsers.map((user, index) => (
 								<tr key={index}>
@@ -99,6 +123,13 @@ const AdminUser = () => {
 							))}
 						</tbody>
 					</table>
+					{newUsers.length === 0 ? (
+						<div className='text-center text-skin-primary-dark dark:text-skin-primary-light text-xl'>
+							Not found
+						</div>
+					) : (
+						""
+					)}
 					<ReactPaginate
 						breakLabel='...'
 						nextLabel='>'
@@ -108,15 +139,16 @@ const AdminUser = () => {
 						previousLabel='<'
 						pageCount={index}
 						containerClassName='pagination'
-						pageClassName='page-item'
-						pageLinkClassName='page-link'
-						previousClassName='page-item'
-						previousLinkClassName='page-link'
-						nextClassName='page-item'
-						nextLinkClassName='page-link'
-						breakClassName='page-item'
-						breakLinkClassName='page-link'
-						activeClassName='active'
+						pageClassName='pageItem'
+						pageLinkClassName='pageLink'
+						previousClassName='pageItem'
+						previousLinkClassName='pageLink'
+						nextClassName='pageItem'
+						nextLinkClassName='pageLink'
+						breakClassName='pageItem'
+						breakLinkClassName='pageLink'
+						activeClassName='activeLink'
+						renderOnZeroPageCount={null}
 					/>
 				</div>
 			</div>

@@ -77,6 +77,10 @@
 		--light-main: 243, 244, 246;
 		--light-acent: 255, 255, 255;
 	}
+	html {
+		box-sizing: border-box;
+		@apply bg-skin-light-acent dark:bg-skin-dark-acent;
+	}
 }
 @layer components {
 	::-webkit-scrollbar {
@@ -86,12 +90,21 @@
 		@apply bg-gray-500;
 	}
 	::-webkit-scrollbar-thumb {
-		@apply bg-skin-primary;
+		@apply bg-skin-primary rounded;
 	}
 	::-webkit-scrollbar-thumb:hover {
 		@apply bg-skin-primary-dark rounded;
 	}
 	.pagination {
-		@apply flex justify-center items-center mt-2 mb-4 space-x-2 cursor-pointer;
+		@apply flex justify-center items-center pt-3 pb-4 space-x-2 cursor-pointer text-skin-primary-dark dark:text-skin-primary-light;
+	}
+	.pageItem {
+		@apply w-7 h-7 bg-skin-light-acent dark:bg-skin-dark-acent hover:text-skin-primary hover:scale-125;
+	}
+	.pageLink {
+		@apply w-full h-full text-center inline-flex items-center justify-center rounded;
+	}
+	.activeLink {
+		@apply text-skin-primary font-semibold scale-125;
 	}
 }

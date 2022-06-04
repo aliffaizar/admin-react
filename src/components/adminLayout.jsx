@@ -8,7 +8,7 @@ const AdminLayout = () => {
 	return (
 		<div className='flex relative'>
 			<AdminSidebar />
-			<div className={sidebar ? "flex-1 ml-16 h-full" : "flex-1 ml-72 h-full"}>
+			<div className={sidebar ? "flex-1 ml-16" : "flex-1 ml-72"}>
 				<AdminHeader />
 				<Outlet />
 			</div>
