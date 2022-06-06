@@ -10,6 +10,9 @@ import {
 	Dashboard,
 	Login,
 	AdminUser,
+	Register,
+	Error404,
+	Kanban,
 } from "./pages";
 
 function App() {
@@ -23,6 +26,7 @@ function App() {
 						<Routes>
 							<Route path='/' element={<AdminLayout />}>
 								<Route index element={<Dashboard />} />
+								<Route path='kanban' element={<Kanban />} />
 								<Route path='hotels' element={<AdminHotel />} />
 								<Route path='booking' element={<AdminBooking />} />
 								<Route path='configs' element={<AdminConfig />} />
@@ -32,6 +36,8 @@ function App() {
 								<Route path='travels' element={<AdminTravel />} />
 							</Route>
 							<Route path='/login' element={<Login />} />
+							<Route path='/register' element={<Register />} />
+							<Route path='/*' element={<Error404 />} />
 						</Routes>
 					</div>
 				</div>

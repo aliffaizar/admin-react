@@ -6,3 +6,6 @@ export { default as AdminTravel } from "./adminTravel";
 export { default as AdminUser } from "./adminUser";
 export { default as AdminConfig } from "./adminConfig";
 export { default as AdminBooking } from "./adminBooking";
+export { default as Register } from "./register";
+export { default as Error404 } from "./error404";
+export { default as Kanban } from "./kanban";

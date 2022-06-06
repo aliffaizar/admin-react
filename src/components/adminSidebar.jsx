@@ -1,45 +1,30 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import { MdDashboard, MdTravelExplore } from "react-icons/md";
-import { RiHotelLine, RiRestaurantLine } from "react-icons/ri";
-import { FaUsers, FaCartArrowDown, FaCogs } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import {
+	FaUsers,
+	FaFileAlt,
+	FaChevronDown,
+	FaSignInAlt,
+	FaUnlink,
+	FaUserPlus,
+} from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { SiYourtraveldottv } from "react-icons/si";
+import { Disclosure } from "@headlessui/react";
+import { BsKanbanFill } from "react-icons/bs";
 
 const AdminSidebar = () => {
 	const { sidebar } = useSelector((state) => state.sidebar);
+
 	const sideNav = [
 		{
 			title: "dashboard",
 			icon: <MdDashboard className='w-5 h-5' />,
 			link: "/",
 		},
-		{
-			title: "hotels",
-			icon: <RiHotelLine className='w-5 h-5' />,
-			link: "hotels",
-		},
-		{
-			title: "restaurants",
-			icon: <RiRestaurantLine className='w-5 h-5' />,
-			link: "restaurants",
-		},
-		{
-			title: "travels",
-			icon: <MdTravelExplore className='w-5 h-5' />,
-			link: "travels",
-		},
+
 		{ title: "users", icon: <FaUsers className='w-5 h-5' />, link: "/users" },
-		{
-			title: "booking",
-			icon: <FaCartArrowDown className='w-5 h-5' />,
-			link: "booking",
-		},
-		{
-			title: "configs",
-			icon: <FaCogs className='w-5 h-5' />,
-			link: "configs",
-		},
 	];
 	return (
 		<>
@@ -60,6 +45,40 @@ const AdminSidebar = () => {
 								</div>
 							</NavLink>
 						))}
+						<NavLink to='kanban'>
+							<div className='inline-flex items-center text-skin-primary-dark dark:text-skin-primary-light w-full rounded px-4 py-2 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium space-x-2'>
+								<BsKanbanFill className='w-5 h-5' />
+							</div>
+						</NavLink>
+						<Disclosure>
+							<>
+								<Disclosure.Button className='inline-flex items-center justify-center text-skin-primary-dark dark:text-skin-primary-light w-full rounded px-4 py-2 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium space-x-2'>
+									<div className='inline-flex items-center space-x-2'>
+										<FaFileAlt className='w-5 h-5' />
+									</div>
+								</Disclosure.Button>
+								<Disclosure.Panel className='flex flex-col px-2 items-center justify-center  rounded'>
+									<NavLink
+										className='dark:text-skin-primary-light rounded w-full px-2 mx-2 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+										to='register'
+									>
+										<FaUserPlus className='h-4 w-4' />
+									</NavLink>
+									<NavLink
+										className='dark:text-skin-primary-light rounded w-full px-2 mx-2 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+										to='login'
+									>
+										<FaSignInAlt className='h-4 w-4' />
+									</NavLink>
+									<NavLink
+										className='dark:text-skin-primary-light rounded w-full px-2 mx-2 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+										to='404'
+									>
+										<FaUnlink className='h-4 w-4' />
+									</NavLink>
+								</Disclosure.Panel>
+							</>
+						</Disclosure>
 					</nav>
 				</aside>
 			) : (
@@ -84,6 +103,49 @@ const AdminSidebar = () => {
 								</div>
 							</NavLink>
 						))}
+						<NavLink to='kanban'>
+							<div className='inline-flex items-center text-skin-primary-dark dark:text-skin-primary-light w-full rounded px-4 py-2 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium space-x-2'>
+								<BsKanbanFill className='w-5 h-5' />
+								<p>kanban</p>
+							</div>
+						</NavLink>
+						<Disclosure>
+							{({ open }) => (
+								<>
+									<Disclosure.Button className='inline-flex items-center justify-between text-skin-primary-dark dark:text-skin-primary-light w-full rounded px-4 py-2 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium space-x-2'>
+										<div className='inline-flex items-center space-x-2'>
+											<FaFileAlt className='w-5 h-5' />
+											<p>pages</p>
+										</div>
+										<FaChevronDown
+											className={`${
+												open ? "rotate-180 transform" : ""
+											} w-3 h-3`}
+										/>
+									</Disclosure.Button>
+									<Disclosure.Panel className='px-5 flex flex-col'>
+										<NavLink
+											className='border-l-2 border-l-skin-primary-dark dark:border-l-skin-primary-light rounded-r text-skin-primary-dark dark:text-skin-primary-light w-full px-4 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+											to='register'
+										>
+											register
+										</NavLink>
+										<NavLink
+											className='border-l-2 border-l-skin-primary-dark dark:border-l-skin-primary-light rounded-r text-skin-primary-dark dark:text-skin-primary-light w-full px-4 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+											to='login'
+										>
+											login
+										</NavLink>
+										<NavLink
+											className='border-l-2 border-l-skin-primary-dark dark:border-l-skin-primary-light rounded-r text-skin-primary-dark dark:text-skin-primary-light w-full px-4 py-1 hover:bg-skin-light-acent dark:hover:bg-skin-dark-acent font-medium'
+											to='404'
+										>
+											404
+										</NavLink>
+									</Disclosure.Panel>
+								</>
+							)}
+						</Disclosure>
 					</nav>
 				</aside>
 			)}

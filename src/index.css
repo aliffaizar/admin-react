@@ -84,7 +84,7 @@
 }
 @layer components {
 	::-webkit-scrollbar {
-		@apply w-[10px];
+		@apply w-[10px] h-[10px];
 	}
 	::-webkit-scrollbar-track {
 		@apply bg-gray-500;
@@ -106,5 +106,8 @@
 	}
 	.activeLink {
 		@apply text-skin-primary font-semibold scale-125;
+	}
+	.react-kanban-board {
+		@apply grid grid-col-4;
 	}
 }
