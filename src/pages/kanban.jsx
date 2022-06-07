@@ -1,76 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { Droppable } from "react-beautiful-dnd";
 import { DragDropContext } from "react-beautiful-dnd";
-import { v4 as uuid } from "uuid";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { upDate } from "../redux/kanbanSlice";
 
 const Kanban = () => {
-	const [kanban, setKanban] = useState([
-		{
-			id: uuid(),
-			title: "Requested",
-			tasks: [
-				{
-					id: uuid(),
-					title: "Task 9",
-				},
-				{
-					id: uuid(),
-					title: "Task 10",
-				},
-			],
-		},
-		{
-			id: "albfda",
-			title: "To Do",
-			tasks: [
-				{
-					id: uuid(),
-					title: "Task 1",
-				},
-				{
-					id: "task2",
-					title: "Task 2",
-				},
-			],
-		},
-		{
-			id: "sgbf",
-			title: "In Progress",
-			tasks: [
-				{
-					id: uuid(),
-					title: "Task 3",
-				},
-			],
-		},
-		{
-			id: "ytga",
-			title: "Done",
-			tasks: [
-				{
-					id: uuid(),
-					title: "Task 4",
-				},
-				{
-					id: uuid(),
-					title: "Task 5",
-				},
-				{
-					id: uuid(),
-					title: "Task 6",
-				},
-				{
-					id: uuid(),
-					title: "Task 7",
-				},
-				{
-					id: uuid(),
-					title: "Task 8",
-				},
-			],
-		},
-	]);
+	const dispatch = useDispatch();
+	const { kanbanData } = useSelector((state) => state.kanban);
+	const [kanban, setKanban] = useState(kanbanData);
 	const onDragEnd = ({ source, destination }) => {
 		if (!destination) {
 			return;
@@ -86,28 +25,27 @@ const Kanban = () => {
 			const destTasks = [...destColumn.tasks];
 			const [removed] = sourceTasks.splice(source.index, 1);
 			destTasks.splice(destination.index, 0, removed);
-			setKanban(
-				kanban.map((column) => {
-					if (column.id === source.droppableId) {
-						return {
-							...column,
-							tasks: sourceTasks,
-						};
-					} else if (column.id === destination.droppableId) {
-						return {
-							...column,
-							tasks: destTasks,
-						};
-					}
-					return column;
-				})
-			);
+			const result = kanban.map((column) => {
+				if (column.id === source.droppableId) {
+					return {
+						...column,
+						tasks: sourceTasks,
+					};
+				} else if (column.id === destination.droppableId) {
+					return {
+						...column,
+						tasks: destTasks,
+					};
+				}
+				return column;
+			});
+			setKanban(result);
 		} else {
 			const column = kanban.find((column) => column.id === source.droppableId);
 			const tasks = [...column.tasks];
 			const [removed] = tasks.splice(source.index, 1);
 			tasks.splice(destination.index, 0, removed);
-			const res = kanban.map((column) => {
+			const result = kanban.map((column) => {
 				if (column.id === source.droppableId) {
 					return {
 						...column,
@@ -116,9 +54,12 @@ const Kanban = () => {
 				}
 				return column;
 			});
-			setKanban(res);
+			setKanban(result);
 		}
 	};
+	useEffect(() => {
+		dispatch(upDate(kanban));
+	}, [dispatch, kanban]);
 	return (
 		<DragDropContext onDragEnd={onDragEnd}>
 			<div className='p-5 space-y-3 flex flex-col h-full'>
