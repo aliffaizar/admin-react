@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../redux/userSlice";
+import { useSelector } from "react-redux";
 
 const AdminUser = () => {
 	const [entries, setEntries] = useState(5);
-	const { users, isLoading, error } = useSelector((state) => state.user);
+	const { users } = useSelector((state) => state.user);
 	const [data, setData] = useState(users);
-	const dispatch = useDispatch();
 	const [index, setIndex] = useState(0);
 	const [newUsers, setNewUsers] = useState([]);
 	const [newUsersOffset, setNewUsersOffset] = useState(0);
@@ -16,9 +14,6 @@ const AdminUser = () => {
 		setEntries(parseInt(e.target.value));
 	};
 
-	useEffect(() => {
-		dispatch(getUsers());
-	}, [dispatch]);
 	useEffect(() => {
 		const endOffset = newUsersOffset + entries;
 		if (query === "") {
@@ -45,9 +40,6 @@ const AdminUser = () => {
 	return (
 		<>
 			<div className='p-5 space-y-3'>
-				{isLoading && <div>Loading...</div>}
-				{error && <div>{error}</div>}
-
 				<h1 className='text-3xl font-bold text-skin-primary-dark dark:text-skin-primary-light'>
 					All Users
 				</h1>

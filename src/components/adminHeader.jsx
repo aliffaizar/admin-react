@@ -45,7 +45,7 @@ const AdminHeader = () => {
 				<Menu as='div' className='relative inline-block'>
 					<Menu.Button>
 						<img
-							src='http://localhost:3000/img/avatar.jpg'
+							src='https://randomuser.me/api/portraits/med/men/27.jpg'
 							alt='avatar'
 							className='w-8 h-8 rounded-full object-center object-cover'
 						/>
